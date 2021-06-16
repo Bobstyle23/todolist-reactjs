@@ -1,4 +1,5 @@
 import React from "react";
+import TodoItem from "./TodoItem";
 import { useState } from "react";
 
 function App() {
@@ -10,13 +11,12 @@ function App() {
     setInputText(newValue);
   }
 
-  function handleItem() {
-    setItems((prevItems) => {
-      return [...prevItems, inputText];
+  function addItem() {
+    setItems((prevValue) => {
+      return [...prevValue, inputText];
     });
     setInputText("");
   }
-
   return (
     <div className="container">
       <div className="heading">
@@ -24,15 +24,15 @@ function App() {
       </div>
       <div className="form">
         <input onChange={handleInput} type="text" value={inputText} />
-        <button onClick={handleItem}>
+        <button onClick={addItem}>
           <span>Add</span>
         </button>
       </div>
       <div>
         <ul>
-          {items.map((todoItem) => {
-            return <li>{todoItem}</li>;
-          })}
+          {items.map((todoItem) => (
+            <TodoItem text={todoItem} />
+          ))}
         </ul>
       </div>
     </div>
